@@ -64,7 +64,11 @@ public class VartotojoSasaja {
                         System.out.println("Marke: " + result.getString("Marke"));
                         System.out.println("Modelis: " + result.getString("Modelis"));
                         System.out.println("Kuro sanaudos: " + result.getString("Kuro_sanaudos"));
-                        System.out.println("Atsarginis ratas: " + result.getString("Atsarginis_ratas_yra"));
+
+                        String yra_ratas = result.getString("Atsarginis_ratas_yra");
+                        yra_ratas = yra_ratas.equals("t") ? "Yra" : "Nera";
+                        System.out.println("Atsarginis ratas: " + yra_ratas);
+
                         System.out.println("Saugos pagalves: " + result.getString("Saugos_pagalves_yra"));
                         System.out.println("Savininkas: " + result.getString("Savininkas"));
                         System.out.println("Autoservisas: " + result.getString("Autoservisas"));
