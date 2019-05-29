@@ -19,7 +19,7 @@ public class VartotojoSasaja {
             // Keisti Automobilio Savininka
             // Iregistruoti nauja Automobili
             // Iregistruoti nauja Vartotoja
-            // Iregistruoti nauja Dalijimosi Imone
+            // Isregistruoti sena Nuoma ir iregistruoti nauja
             // Pasalinti Automobili
             // Pasalinti Vartotoja
 

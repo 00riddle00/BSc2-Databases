@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 // Keisti Automobilio Savininka
 // Iregistruoti nauja Automobili
 // Iregistruoti nauja Vartotoja
-// Iregistruoti nauja Dalijimosi Imone
+// Isregistruoti sena Nuoma ir iregistruoti nauja
 // Pasalinti Automobili
 // Pasalinti Vartotoja
 public class Duombaze {
