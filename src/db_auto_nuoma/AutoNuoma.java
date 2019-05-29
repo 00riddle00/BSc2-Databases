@@ -4,6 +4,7 @@ package db_auto_nuoma;
  * @author Tomas Giedraitis 2k. 2gr. MIF VU INFO 2019
  */
 
+import java.io.IOException;
 import java.sql.Connection;
         import java.sql.DriverManager;
         import java.sql.SQLException;
@@ -43,9 +44,16 @@ public class AutoNuoma {
         Connection con = getConnection();
 
         if (null != con) {
-            Duombaze db = new Duombaze();
+            Duombaze db = new Duombaze("togi3017");
             db.initPreparedStatements();
-            VartotojoSasaja.init(db);
+
+            try {
+                VartotojoSasaja.init(db);
+            } catch (IOException exp) {
+                System.out.println("IO Error!");
+                exp.printStackTrace();
+            }
+
             db.closePreparedStatements();
         }
 
