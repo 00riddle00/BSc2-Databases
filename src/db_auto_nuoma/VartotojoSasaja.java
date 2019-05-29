@@ -148,7 +148,7 @@ public class VartotojoSasaja {
                     System.out.println("  Iveskite modeli:");
                     String modelis = in.readLine();
                     System.out.println("  Iveskite kuro sanaudas:");
-                    float kuro_sanaudos = parseFloat(in.readLine());
+                    String kuro_sanaudos = in.readLine();
 
 
                     System.out.println("  Jei automobilis turi atsargini rata, iveskite '1':");
@@ -199,13 +199,7 @@ public class VartotojoSasaja {
                     String tel_nr = in.readLine();
 
                     System.out.println("  Iveskite menesio pajamas: (Palikite tuscia (Enter), jei nera informacijos)");
-                    String str_menesio_pajamos = in.readLine();
-
-                    int menesio_pajamos = 0;
-
-                    if (!str_menesio_pajamos.equals("")) {
-                        menesio_pajamos = Integer.parseInt(str_menesio_pajamos);
-                    }
+                    String menesio_pajamos = in.readLine();
 
                     Baze.insertZmogus(asmens_kodas, vardas, pavarde, gimimas, tel_nr, menesio_pajamos);
                     System.out.println("Naujas zmogus sekmingai uzregistruotas!");
