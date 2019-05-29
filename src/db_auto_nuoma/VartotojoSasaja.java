@@ -14,10 +14,8 @@ public class VartotojoSasaja {
         while (!action.equals("0")) {
 
             // Ieskoti TP pagal VIN
-            // Ieskoti TP pagal valst. nr.
             // Ieskoti zmogu pagal asmens_koda
             // Keisti TP valst. nr.
-            // Keisti TP spalva
             // Keisti TP savininka
             // Iregistruoti nauja TP
             // Iregistruoti zmogu
@@ -25,18 +23,28 @@ public class VartotojoSasaja {
             // Pasalinti TP
             // Pasalinti zmogu
 
+            // Ieskoti Automobilio pagal Kebulo Nr.
+            // Ieskoti Vartotojo pagal AK
+            // Keisti Automobilio valst. nr.
+            // Keisti Automobilio Savininka
+            // Iregistruoti nauja Automobili
+            // Iregistruoti nauja Vartotoja
+            // Iregistruoti nauja Dalijimosi Imone
+            // Pasalinti Automobili
+            // Pasalinti Vartotoja
+
             System.out.println("\n-------------------------------------------------------");
-            System.out.println("-> Automobiliu, ju savininku ir autoivykiu duomenu baze");
+            System.out.println("-> Automobiliu nuomos duomenu baze (vartotojai, automobiliai, dalijimosi imones, autoservisai)");
             System.out.println("Veiksmai:");
-            System.out.println("  1) Surasti Automobili pagal kebulo nr.");
-            System.out.println("  2) Surasti Zmogu pagal asmens koda");
+            System.out.println("  1) Surasti automobili pagal kebulo nr.");
+            System.out.println("  2) Surasti vartotoja pagal asmens koda");
             System.out.println("  3) Pakeisti Automobilio valstybini numeri");
             System.out.println("  4) Pakeisti Automobilio savininka");
-            System.out.println("  5) Uzregistruoti nauja Automobili");
-            System.out.println("  6) Uzregistruoti nauja Zmogu");
-            System.out.println("  7) Uzregistruoti Autoivyki");
-            System.out.println("  8) Isregistruoti Automobili");
-            System.out.println("  9) Isregistruoti Zmogu");
+            System.out.println("  5) Uzregistruoti nauja automobili");
+            System.out.println("  6) Uzregistruoti nauja vartotoja");
+            System.out.println("  7) Uzregistruoti nauja dalijimosi imone");
+            System.out.println("  8) Isregistruoti automobili");
+            System.out.println("  9) Isregistruoti vartotoja");
             System.out.println("  0) Iseiti");
             System.out.println("Pasirinkite veiksma: ");
             action = in.readLine();
@@ -52,11 +60,14 @@ public class VartotojoSasaja {
                     } else {
                         System.out.println("\nKebulo nr.: " + result.getString("Kebulo_nr"));
                         System.out.println("Valstybinis nr.: " + result.getString("Valst_nr"));
-                        System.out.println("Marke: " + result.getString("marke"));
-                        System.out.println("Modelis: " + result.getString("modelis"));
-                        System.out.println("Spalva: " + result.getString("spalva"));
-                        System.out.println("Pagaminimo metai: " + result.getInt("metai"));
-                        System.out.println("Savininkas: " + result.getString("vardas") + " " + result.getString("pavarde") + ", " + result.getString("savininkas"));
+                        System.out.println("Gamybos metai: " + result.getString("Gamybos_metai"));
+                        System.out.println("Marke: " + result.getString("Marke"));
+                        System.out.println("Modelis: " + result.getString("Modelis"));
+                        System.out.println("Kuro sanaudos: " + result.getString("Kuro_sanaudos"));
+                        System.out.println("Atsarginis ratas: " + result.getString("Atsarginis_ratas_yra"));
+                        System.out.println("Saugos pagalves: " + result.getString("Saugos_pagalves_yra"));
+                        System.out.println("Savininkas: " + result.getString("Savininkas"));
+                        System.out.println("Autoservisas: " + result.getString("Autoservisas"));
                     }
                 }
                 if (action.equals("2")) {

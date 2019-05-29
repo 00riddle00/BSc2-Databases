@@ -7,16 +7,24 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 // Ieskoti TP pagal VIN
-// Ieskoti TP pagal valst. nr.
 // Ieskoti zmogu pagal asmens_koda
 // Keisti TP valst. nr.
-// Keisti TP spalva
 // Keisti TP savininka
 // Iregistruoti nauja TP
 // Iregistruoti zmogu
 // Iregistruoti autoivyki
 // Pasalinti TP
 // Pasalinti zmogu
+
+// Ieskoti Automobilio pagal Kebulo Nr.
+// Ieskoti Vartotojo pagal AK
+// Keisti Automobilio valst. nr.
+// Keisti Automobilio Savininka
+// Iregistruoti nauja Automobili
+// Iregistruoti nauja Vartotoja
+// Iregistruoti nauja Dalijimosi Imone
+// Pasalinti Automobili
+// Pasalinti Vartotoja
 public class Duombaze {
 
     public Connection con = null;
