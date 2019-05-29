@@ -225,12 +225,8 @@ public class Duombaze {
         try {
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Imonese_nuomuojami_automobiliai WHERE Automobilio_keb_nr = '" + VN + "'");
+            return result;
 
-            if (result.isBeforeFirst()) {
-                return result;
-            } else {
-                return null;
-            }
         } catch (SQLException sqle) {
             System.out.println(sqle);
             return null;

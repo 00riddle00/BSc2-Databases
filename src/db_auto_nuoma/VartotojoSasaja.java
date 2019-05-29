@@ -241,7 +241,7 @@ public class VartotojoSasaja {
                     if (result == null) {
                         System.out.println("Toks automobilis nerastas!");
                     } else {
-                        System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: " + result.getInt("Eil_nr"));
+                        System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: ");
                         while (result.next()) {
                             System.out.println("\nEiles nr.: " + result.getInt("Eil_nr"));
                             System.out.println("Nuomuojancios imones kodas: " + result.getString("Imones_kodas"));
@@ -265,7 +265,7 @@ public class VartotojoSasaja {
                         if (result2 == null) {
                             System.out.println("Automobilis siuo metu niekur nenuomuojamas!");
                         } else {
-                            System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: " + result2.getInt("Eil_nr"));
+                            System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: ");
                             while (result2.next()) {
                                 System.out.println("\nEiles nr.: " + result2.getInt("Eil_nr"));
                                 System.out.println("Nuomuojancios imones kodas: " + result2.getString("Imones_kodas"));
@@ -284,7 +284,7 @@ public class VartotojoSasaja {
                         if (result3 == null) {
                             System.out.println("Automobilis siuo metu niekur nenuomuojamas!");
                         } else {
-                            System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: " + result3.getInt("Eil_nr"));
+                            System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: ");
                             while (result3.next()) {
                                 System.out.println("\nEiles nr.: " + result3.getInt("Eil_nr"));
                                 System.out.println("Nuomuojancios imones kodas: " + result3.getString("Imones_kodas"));
