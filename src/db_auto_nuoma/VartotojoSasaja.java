@@ -72,6 +72,9 @@ public class VartotojoSasaja {
 
                         System.out.println("Savininkas: " + result.getString("Savininkas"));
 
+                        String savininkas = result.getString("Savininkas");
+
+
                         String autoservisas = result.getString("Autoservisas");
                         if (autoservisas == null) autoservisas = "Nera";
                         System.out.println("Autoservisas: " + autoservisas);
