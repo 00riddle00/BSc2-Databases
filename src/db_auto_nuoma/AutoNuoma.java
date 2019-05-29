@@ -46,7 +46,7 @@ public class AutoNuoma {
         Connection con = getConnection();
 
         if (null != con) {
-            Duombaze db = new Duombaze("togi3017");
+            Duombaze db = new Duombaze(con, "togi3017");
             db.initPreparedStatements();
 
             try {

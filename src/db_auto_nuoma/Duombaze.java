@@ -27,9 +27,9 @@ import java.sql.PreparedStatement;
 // Pasalinti Vartotoja
 public class Duombaze {
 
-    public Connection con = null;
-
+    public Connection con;
     private String scheme;
+
     private PreparedStatement stmt_updateVN;
     private PreparedStatement stmt_updateSav;
     private PreparedStatement stmt_deleteAuto;
@@ -39,7 +39,8 @@ public class Duombaze {
     private PreparedStatement stmt_insertIvykis;
     private PreparedStatement stmt_deleteIvykis;
 
-    public Duombaze(String scheme) {
+    public Duombaze(Connection con, String scheme) {
+        this.con = con;
         this.scheme = scheme;
     }
 
