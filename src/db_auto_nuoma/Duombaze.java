@@ -184,7 +184,7 @@ public class Duombaze {
         }
     }
 
-    public void insertAuto(String vin, String vn, int gamybos_metai, String marke, String modelis, int kuro_sanaudos, boolean atsarginis_ratas_yra, boolean saugos_pagalves_yra, String savininkas, String autoservisas) throws
+    public void insertAuto(String vin, String vn, int gamybos_metai, String marke, String modelis, float kuro_sanaudos, boolean atsarginis_ratas_yra, boolean saugos_pagalves_yra, String savininkas, String autoservisas) throws
             SQLException {
         try {
             this.stmt_insertAuto.setString(1, vin);
@@ -192,7 +192,7 @@ public class Duombaze {
             this.stmt_insertAuto.setInt(3, gamybos_metai);
             this.stmt_insertAuto.setString(4, marke);
             this.stmt_insertAuto.setString(5, modelis);
-            this.stmt_insertAuto.setInt(6, kuro_sanaudos);
+            this.stmt_insertAuto.setFloat(6, kuro_sanaudos);
             this.stmt_insertAuto.setBoolean(7, atsarginis_ratas_yra);
             this.stmt_insertAuto.setBoolean(8, saugos_pagalves_yra);
             this.stmt_insertAuto.setString(9, savininkas);
