@@ -178,20 +178,18 @@ public class VartotojoSasaja {
 
                     System.out.println("  Iveskite savininko asmens koda:");
                     String savininkas = in.readLine();
+
                     System.out.println("  Iveskite autoserviso imones koda: (Palikite tuscia (Enter), jei nera informacijos)");
                     String autoservisas = in.readLine();
+                    if (autoservisas.equals("")) {
+                        autoservisas = "NULL";
+                    }
+
                     Baze.insertAuto(kebulo_nr, valst_nr, gamybos_metai, marke, modelis, kuro_sanaudos, atsarginis_ratas_yra, saugos_pagalves_yra, savininkas, autoservisas);
                     System.out.println("Naujas automobilis sekmingai uzregistruotas!");
                 }
 
                 if (action.equals("6")) {
-
-                    System.out.println("  Iveskite menesio pajamas: (Palikite tuscia (Enter), jei nera informacijos)");
-                    String menesio_pajamos = in.readLine();
-                    if (menesio_pajamos.equals("")) {
-                        System.out.println("\nTRUE\n");
-                    }
-                    
                     System.out.println("\nNaujo vartotojo registracija");
                     System.out.println("  Iveskite asmens koda:");
                     String asmens_kodas = in.readLine();
@@ -203,8 +201,12 @@ public class VartotojoSasaja {
                     String gimimas = in.readLine();
                     System.out.println("  Iveskite telefono numeri:");
                     String tel_nr = in.readLine();
-//                    System.out.println("  Iveskite menesio pajamas: (Palikite tuscia (Enter), jei nera informacijos)");
-//                    String menesio_pajamos = in.readLine();
+
+                    System.out.println("  Iveskite menesio pajamas: (Palikite tuscia (Enter), jei nera informacijos)");
+                    String menesio_pajamos = in.readLine();
+                    if (menesio_pajamos.equals("")) {
+                        menesio_pajamos = "NULL";
+                    }
 
                     Baze.insertZmogus(asmens_kodas, vardas, pavarde, gimimas, tel_nr, menesio_pajamos);
                     System.out.println("Naujas zmogus sekmingai uzregistruotas!");
