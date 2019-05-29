@@ -26,20 +26,9 @@ public class AutoNuoma {
     /********************************************************/
     public static Connection getConnection() {
 
-
-
         Connection postGresConn = null;
         try {
-//            String url = "jdbc:postgresql:/pgsql3.mif/studentu";
-//            Properties props = new Properties();
-//            props.setProperty("user","togi3017");
-//            props.setProperty("password","asdfjkl8gb");
-//            props.setProperty("ssl","true");
-
-//            postGresConn = DriverManager.getConnection(url, props);
-
-            postGresConn = DriverManager.getConnection("jdbc:postgresql:/pgsql3.mif/studentu", "togi3017", "asdfjkl8gb");
-
+            postGresConn = DriverManager.getConnection("jdbc:postgresql://pgsql3.mif/studentu", "togi3017", "asdfjkl8gb");
         } catch (SQLException sqle) {
             System.out.println("Couldn't connect to database!");
             sqle.printStackTrace();

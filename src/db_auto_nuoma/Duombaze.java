@@ -59,6 +59,8 @@ public class Duombaze {
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
+        } catch (Exception exc) {
+            System.out.println(exc);
         }
     }
 
@@ -76,88 +78,158 @@ public class Duombaze {
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
+        } catch (Exception exc) {
+            System.out.println(exc);
         }
     }
 
 
     public ResultSet searchAutoByVIN(String vin) throws SQLException {
-        Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = '" + vin + "'");
-        if (result.next()) {
-            return result;
-        } else {
+        try {
+            Statement stmt = con.createStatement();
+//            ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = '" + vin + "'");
+            ResultSet result = stmt.executeQuery("SELECT * FROM togi3017.Automobilis WHERE Kebulo_nr = 'AFA10200000555001'");
+            System.out.println("\ntest\n");
+            if (result.next()) {
+                return result;
+            } else {
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return null;
+        } catch (Exception exc) {
+            System.out.println(exc);
             return null;
         }
     }
 
     public ResultSet searchZmogusByAK(String AK) throws SQLException {
-        Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Vartotojas WHERE AK = '" + AK + "'");
-        if (result.next()) {
-            return result;
-        } else {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Vartotojas WHERE AK = '" + AK + "'");
+            if (result.next()) {
+                return result;
+            } else {
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return null;
+        } catch (Exception exc) {
+            System.out.println(exc);
             return null;
         }
     }
 
     public ResultSet searchZmogausAutos(String AK) throws SQLException {
-        Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Savininkas = '" + AK + "'");
-        if (result.next()) {
-            return result;
-        } else {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Savininkas = '" + AK + "'");
+            if (result.next()) {
+                return result;
+            } else {
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return null;
+        } catch (Exception exc) {
+            System.out.println(exc);
             return null;
         }
     }
 
     public int updateVN(String valst_nr, String vin) throws SQLException {
-        this.stmt_updateVN.setString(1, valst_nr);
-        this.stmt_updateVN.setString(2, vin);
-        return this.stmt_updateVN.executeUpdate();
+        try {
+            this.stmt_updateVN.setString(1, valst_nr);
+            this.stmt_updateVN.setString(2, vin);
+            return this.stmt_updateVN.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return 0;
+        } catch (Exception exc) {
+            System.out.println(exc);
+            return 0;
+        }
     }
 
     public int updateSav(String ak, String vin) throws SQLException {
-        this.stmt_updateSav.setString(1, ak);
-        this.stmt_updateSav.setString(2, vin);
-        return this.stmt_updateSav.executeUpdate();
+        try {
+            this.stmt_updateSav.setString(1, ak);
+            this.stmt_updateSav.setString(2, vin);
+            return this.stmt_updateSav.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return 0;
+        } catch (Exception exc) {
+            System.out.println(exc);
+            return 0;
+        }
     }
 
     public int deleteAuto(String vin) throws SQLException {
-        this.stmt_deleteAuto.setString(1, vin);
-        return this.stmt_deleteAuto.executeUpdate();
+        try {
+            this.stmt_deleteAuto.setString(1, vin);
+            return this.stmt_deleteAuto.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return 0;
+        } catch (Exception exc) {
+            System.out.println(exc);
+            return 0;
+        }
     }
 
     public int deleteZmogus(String ak) throws SQLException {
-        this.stmt_deleteVartotojas.setString(1, ak);
-        return this.stmt_deleteVartotojas.executeUpdate();
+        try {
+            this.stmt_deleteVartotojas.setString(1, ak);
+            return this.stmt_deleteVartotojas.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return 0;
+        } catch (Exception exc) {
+            System.out.println(exc);
+            return 0;
+        }
     }
 
-    public void insertAuto(String vin, String vn, int gamybos_metai, String marke, String modelis, int kuro_sanaudos, boolean atsarginis_ratas_yra, boolean saugos_pagalves_yra, String savininkas, String autoservisas) throws SQLException {
-        this.stmt_insertAuto.setString(1, vin);
-        this.stmt_insertAuto.setString(2, vn);
-        this.stmt_insertAuto.setInt(3, gamybos_metai);
-        this.stmt_insertAuto.setString(4, marke);
-        this.stmt_insertAuto.setString(5, modelis);
-        this.stmt_insertAuto.setInt(6, kuro_sanaudos);
-        this.stmt_insertAuto.setBoolean(7, atsarginis_ratas_yra);
-        this.stmt_insertAuto.setBoolean(8, saugos_pagalves_yra);
-        this.stmt_insertAuto.setString(9, savininkas);
-        this.stmt_insertAuto.setString(10, autoservisas);
-        this.stmt_insertAuto.executeUpdate();
+    public void insertAuto(String vin, String vn, int gamybos_metai, String marke, String modelis, int kuro_sanaudos, boolean atsarginis_ratas_yra, boolean saugos_pagalves_yra, String savininkas, String autoservisas) throws
+            SQLException {
+        try {
+            this.stmt_insertAuto.setString(1, vin);
+            this.stmt_insertAuto.setString(2, vn);
+            this.stmt_insertAuto.setInt(3, gamybos_metai);
+            this.stmt_insertAuto.setString(4, marke);
+            this.stmt_insertAuto.setString(5, modelis);
+            this.stmt_insertAuto.setInt(6, kuro_sanaudos);
+            this.stmt_insertAuto.setBoolean(7, atsarginis_ratas_yra);
+            this.stmt_insertAuto.setBoolean(8, saugos_pagalves_yra);
+            this.stmt_insertAuto.setString(9, savininkas);
+            this.stmt_insertAuto.setString(10, autoservisas);
+            this.stmt_insertAuto.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
     }
 
     public void insertZmogus(String asmens_kodas, String vardas, String pavarde, String gimimas, String tel_nr, String menesio_pajamos) throws SQLException {
-        this.stmt_insertVartotojas.setString(1, asmens_kodas);
-        this.stmt_insertVartotojas.setString(2, vardas);
-        this.stmt_insertVartotojas.setString(3, pavarde);
-        this.stmt_insertVartotojas.setString(4, gimimas);
-        this.stmt_insertVartotojas.setString(5, tel_nr);
-        this.stmt_insertVartotojas.setString(6, menesio_pajamos);
-        this.stmt_insertVartotojas.executeUpdate();
+        try {
+            this.stmt_insertVartotojas.setString(1, asmens_kodas);
+            this.stmt_insertVartotojas.setString(2, vardas);
+            this.stmt_insertVartotojas.setString(3, pavarde);
+            this.stmt_insertVartotojas.setString(4, gimimas);
+            this.stmt_insertVartotojas.setString(5, tel_nr);
+            this.stmt_insertVartotojas.setString(6, menesio_pajamos);
+            this.stmt_insertVartotojas.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
     }
-
-
-
 
 
 //    public int getLastIvykis() throws SQLException {
