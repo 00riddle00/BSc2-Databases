@@ -19,17 +19,17 @@ public class VartotojoSasaja {
             // Keisti Automobilio Savininka
             // Iregistruoti nauja Automobili
             // Iregistruoti nauja Vartotoja
-            // Isregistruoti sena Nuoma ir iregistruoti nauja
             // Pasalinti Automobili
             // Pasalinti Vartotoja
+            // Isregistruoti sena Nuoma ir iregistruoti nauja
 
 
             System.out.println("\n|------------------------------------------------------|");
-            System.out.println ("|         ______                                       |");
-            System.out.println ("|        /|_||_\\`.__                                   |");
-            System.out.println ("|       (   _    _ _\\                                  |");
-            System.out.println ("|       =`-(_)--(_)-'                                  |");
-            System.out.println ("|------------------------------------------------------|");
+            System.out.println("|         ______                                       |");
+            System.out.println("|        /|_||_\\`.__                                   |");
+            System.out.println("|       (   _    _ _\\                                  |");
+            System.out.println("|       =`-(_)--(_)-'                                  |");
+            System.out.println("|------------------------------------------------------|");
 
             System.out.println("-> Automobiliu nuomos duomenu baze (vartotojai, automobiliai, dalijimosi imones, autoservisai)");
             System.out.println("Veiksmai:");
@@ -39,9 +39,9 @@ public class VartotojoSasaja {
             System.out.println("  4) Pakeisti Automobilio savininka");
             System.out.println("  5) Uzregistruoti nauja automobili");
             System.out.println("  6) Uzregistruoti nauja vartotoja");
-            System.out.println("  7) Uzregistruoti nauja dalijimosi imone");
-            System.out.println("  8) Isregistruoti automobili");
-            System.out.println("  9) Isregistruoti vartotoja");
+            System.out.println("  7) Isregistruoti automobili");
+            System.out.println("  8) Isregistruoti vartotoja");
+            System.out.println("  9) Perkelti automobilio nuoma is vienos dalijimosi imones i kita");
             System.out.println("  0) Iseiti");
             System.out.println("Pasirinkite veiksma: ");
             action = in.readLine();
@@ -156,12 +156,9 @@ public class VartotojoSasaja {
                     String input_atsarginis_ratas_yra = in.readLine();
                     boolean atsarginis_ratas_yra;
 
-                    if (input_atsarginis_ratas_yra.equals("1"))
-                    {
+                    if (input_atsarginis_ratas_yra.equals("1")) {
                         atsarginis_ratas_yra = true;
-                    }
-                    else
-                    {
+                    } else {
                         atsarginis_ratas_yra = false;
                     }
 
@@ -170,12 +167,9 @@ public class VartotojoSasaja {
                     String input_saugos_pagalves_yra = in.readLine();
                     boolean saugos_pagalves_yra;
 
-                    if (input_saugos_pagalves_yra.equals("1"))
-                    {
+                    if (input_saugos_pagalves_yra.equals("1")) {
                         saugos_pagalves_yra = true;
-                    }
-                    else
-                    {
+                    } else {
                         saugos_pagalves_yra = false;
                     }
 
@@ -215,40 +209,7 @@ public class VartotojoSasaja {
                     System.out.println("Naujas zmogus sekmingai uzregistruotas!");
                 }
 
-//                if (action.equals("7"))
-//                {
-//                    System.out.println("\nAutomobilio nuomos perkelimas i kita dalijimosi imone (paslaugu atsisakymas ir uzsisakymas tu paciu paslaugu kitoje imoneje");
-//                    System.out.println("  Iveskite imones koda tos imones, is kurios paslaugu yra atsisakoma:");
-//                    String senos_im_kodas = in.readLine();
-//                    System.out.println("  Iveskite imones koda kitos imones, kurios paslaugu yra uzsisakoma:");
-//                    String naujos_im_kodas = in.readLine();
-//                    System.out.println("  Iveskite automobilio kebulo nr.:");
-//                    String kebulo_nr = in.readLine();
-//
-//                    // TODO id ivedimas (su try)
-//                    int nr = Baze.getLastIvykis();
-//
-//                    try
-//                    {
-//                        Baze.con.setAutoCommit(false);
-//
-//                        Baze.deleteIvykis(nr, im_kodas, kebulo_nr);
-//                        Baze.insertIvykis(nr, im_kodas, kebulo_nr);
-//
-//                        Baze.con.commit();
-//                        Baze.con.setAutoCommit(true);
-//                        System.out.println("Automobilio nuomos i kita dalijimosi imoneje perkelimas sekmingai uzregistruotas!");
-//                    }
-//                    catch (SQLException ex)
-//                    {
-//                        System.out.println("Klaida vykdant transakcija: " + ex.getMessage());
-//                        Baze.con.rollback();
-//                        Baze.con.setAutoCommit(true);
-//                    }
-//                }
-
-
-                if (action.equals("8")) {
+                if (action.equals("7")) {
                     System.out.println("\nAutomobilio isregistravimas");
                     System.out.println("  Iveskite automobilio kebulo nr.:");
                     String kebulo_nr = in.readLine();
@@ -258,7 +219,7 @@ public class VartotojoSasaja {
                         System.out.println("Automobilis sekmingai isregistruotas!");
                     }
                 }
-                if (action.equals("9")) {
+                if (action.equals("8")) {
                     System.out.println("\nVartotojo isregistravimas");
                     System.out.println("  Iveskite vartotojo asmens koda:");
                     String asmens_kodas = in.readLine();
@@ -268,6 +229,78 @@ public class VartotojoSasaja {
                         System.out.println("Zmogus sekmingai isregistruotas!");
                     }
                 }
+
+
+                if (action.equals("9")) {
+                    System.out.println("\nAutomobilio nuomos perkelimas i kita dalijimosi imone (paslaugu atsisakymas ir uzsisakymas tu paciu paslaugu kitoje imoneje");
+                    System.out.println("  Iveskite automobilio kebulo nr.:");
+                    String kebulo_nr = in.readLine();
+
+                    ResultSet result = Baze.showNuomAuto(kebulo_nr);
+
+                    if (result == null) {
+                        System.out.println("Toks automobilis nerastas!");
+                    } else {
+                        System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: " + result.getInt("Eil_nr"));
+                        while (result.next()) {
+                            System.out.println("\nEiles nr.: " + result.getInt("Eil_nr"));
+                            System.out.println("Nuomuojancios imones kodas: " + result.getString("Imones_kodas"));
+                        }
+                    }
+
+                    try {
+                        Baze.con.setAutoCommit(false);
+
+                        System.out.println("  Pazymekite imone, is kurios paslaugu yra atsisakoma (Iveskite iraso eiles numeri):");
+                        int nr = Integer.parseInt(in.readLine());
+
+                        if (Baze.deleteNuomAuto(nr) == 0) {
+                            System.out.println("Toks irasas nerastas!");
+                        } else {
+                            System.out.println("Nuomos imoneje sekmingai atsisakyta!");
+                        }
+
+                        ResultSet result2 = Baze.showNuomAuto(kebulo_nr);
+
+                        if (result2 == null) {
+                            System.out.println("Automobilis siuo metu niekur nenuomuojamas!");
+                        } else {
+                            System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: " + result2.getInt("Eil_nr"));
+                            while (result2.next()) {
+                                System.out.println("\nEiles nr.: " + result2.getInt("Eil_nr"));
+                                System.out.println("Nuomuojancios imones kodas: " + result2.getString("Imones_kodas"));
+                            }
+                        }
+
+                        System.out.println("  Iveskite koda kitos imones, kurios paslaugu yra uzsisakoma:");
+                        String naujos_im_kodas = in.readLine();
+
+                        Baze.insertNuomAuto(naujos_im_kodas, kebulo_nr);
+                        System.out.println("Automobilio nuoma naujoje imoneje sekmingai uzregistruota!");
+
+
+                        ResultSet result3 = Baze.showNuomAuto(kebulo_nr);
+
+                        if (result3 == null) {
+                            System.out.println("Automobilis siuo metu niekur nenuomuojamas!");
+                        } else {
+                            System.out.println("\nSarasas imoniu, kuriose sis automobilis nuomuojamas: " + result3.getInt("Eil_nr"));
+                            while (result3.next()) {
+                                System.out.println("\nEiles nr.: " + result3.getInt("Eil_nr"));
+                                System.out.println("Nuomuojancios imones kodas: " + result3.getString("Imones_kodas"));
+                            }
+                        }
+
+                        Baze.con.commit();
+                        Baze.con.setAutoCommit(true);
+                    } catch (SQLException ex) {
+                        System.out.println("Klaida vykdant transakcija: " + ex.getMessage());
+                        System.out.println("\nAutomobilio perkelti i kita imone nepavyko");
+                        Baze.con.rollback();
+                        Baze.con.setAutoCommit(true);
+                    }
+                }
+
             } catch (SQLException ex) {
                 System.out.println("Klaida dirbant su duomenu baze: " + ex.getMessage());
             }

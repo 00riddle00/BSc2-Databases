@@ -1,5 +1,6 @@
 package db_auto_nuoma;
 
+import javax.xml.bind.annotation.XmlType;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +13,9 @@ import java.sql.PreparedStatement;
 // Keisti Automobilio Savininka
 // Iregistruoti nauja Automobili
 // Iregistruoti nauja Vartotoja
-// Isregistruoti sena Nuoma ir iregistruoti nauja
 // Pasalinti Automobili
 // Pasalinti Vartotoja
+// Isregistruoti sena Nuoma ir iregistruoti nauja
 public class Duombaze {
 
     public Connection con;
@@ -26,8 +27,8 @@ public class Duombaze {
     private PreparedStatement stmt_deleteVartotojas;
     private PreparedStatement stmt_insertAuto;
     private PreparedStatement stmt_insertVartotojas;
-    private PreparedStatement stmt_insertIvykis;
-    private PreparedStatement stmt_deleteIvykis;
+    private PreparedStatement stmt_deleteNuomAuto;
+    private PreparedStatement stmt_insertNuomAuto;
 
     public Duombaze(Connection con, String scheme) {
         this.con = con;
@@ -45,8 +46,8 @@ public class Duombaze {
             this.stmt_insertAuto = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Automobilis VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             this.stmt_insertVartotojas = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Vartotojas VALUES(?, ?, ?, ?, ?, ?)");
 
-            this.stmt_insertIvykis = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Imonese_nuomuojami_automobiliai VALUES(DDEFAULT, ?, ?)");
-            this.stmt_deleteIvykis = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Imonese_nuomuojami_automobiliai WHERE Eil_nr = ?");
+            this.stmt_deleteNuomAuto = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Imonese_nuomuojami_automobiliai WHERE Eil_nr = ?");
+            this.stmt_insertNuomAuto = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Imonese_nuomuojami_automobiliai VALUES(DEFAULT, ?, ?)");
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
@@ -64,8 +65,8 @@ public class Duombaze {
 
             this.stmt_insertAuto.close();
             this.stmt_insertVartotojas.close();
-            this.stmt_insertIvykis.close();
-            this.stmt_deleteIvykis.close();
+            this.stmt_deleteNuomAuto.close();
+            this.stmt_insertNuomAuto.close();
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
@@ -220,30 +221,48 @@ public class Duombaze {
         }
     }
 
+    public ResultSet showNuomAuto(String VN) throws SQLException {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Imonese_nuomuojami_automobiliai WHERE Automobilio_keb_nr = '" + VN + "'");
 
-//    public int getLastIvykis() throws SQLException {
-//        Statement stmt = con.createStatement();
-//        ResultSet result = stmt.executeQuery("SELECT MAX(Nr) AS last FROM " + this.scheme + ".Autoivykis");
-//        result.next();
-//        return result.getInt("last");
-//    }
-//
-//    public void insertIvykis(String vieta) throws SQLException {
-//        this.stmt_insertIvykis.setString(1, vieta);
-//        this.stmt_insertIvykis.executeUpdate();
-//    }
-//
-//    public void insertDalyvis(int nr, String vin, String asmens_kodas, boolean kaltas) throws SQLException {
-//        this.stmt_deleteIvykis.setInt(1, nr);
-//        this.stmt_deleteIvykis.setString(2, vin);
-//        this.stmt_deleteIvykis.setString(3, asmens_kodas);
-//        if (kaltas) {
-//            this.stmt_deleteIvykis.setInt(4, 1);
-//        } else {
-//            this.stmt_deleteIvykis.setInt(4, 0);
-//        }
-//        this.stmt_deleteIvykis.executeUpdate();
-//    }
+            if (result.isBeforeFirst()) {
+                return result;
+            } else {
+                return null;
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return null;
+        } catch (Exception exc) {
+            System.out.println(exc);
+            return null;
+        }
+    }
 
+    public int deleteNuomAuto(int nr) throws SQLException {
+        try {
+            this.stmt_deleteNuomAuto.setInt(1, nr);
+            return this.stmt_deleteNuomAuto.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            return 0;
+        } catch (Exception exc) {
+            System.out.println(exc);
+            return 0;
+        }
+    }
+
+    public void insertNuomAuto(String imones_kodas, String VN) throws SQLException {
+        try {
+            this.stmt_insertNuomAuto.setString(1, imones_kodas);
+            this.stmt_insertNuomAuto.setString(2, VN);
+            this.stmt_insertNuomAuto.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        } catch (Exception exc) {
+            System.out.println(exc);
+        }
+    }
 
 }
