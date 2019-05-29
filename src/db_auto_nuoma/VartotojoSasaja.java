@@ -198,37 +198,37 @@ public class VartotojoSasaja {
                     System.out.println("Naujas zmogus sekmingai uzregistruotas!");
                 }
 
-                if (action.equals("7"))
-                {
-                    System.out.println("\nAutomobilio nuomos perkelimas i kita dalijimosi imone (paslaugu atsisakymas ir uzsisakymas tu paciu paslaugu kitoje imoneje");
-                    System.out.println("  Iveskite imones koda tos imones, is kurios paslaugu yra atsisakoma:");
-                    String senos_im_kodas = in.readLine();
-                    System.out.println("  Iveskite imones koda kitos imones, kurios paslaugu yra uzsisakoma:");
-                    String naujos_im_kodas = in.readLine();
-                    System.out.println("  Iveskite automobilio kebulo nr.:");
-                    String kebulo_nr = in.readLine();
-
-                    // TODO id ivedimas (su try)
-                    int nr = Baze.getLastIvykis();
-
-                    try
-                    {
-                        Baze.con.setAutoCommit(false);
-
-                        Baze.deleteIvykis(nr, im_kodas, kebulo_nr);
-                        Baze.insertIvykis(nr, im_kodas, kebulo_nr);
-
-                        Baze.con.commit();
-                        Baze.con.setAutoCommit(true);
-                        System.out.println("Automobilio nuomos i kita dalijimosi imoneje perkelimas sekmingai uzregistruotas!");
-                    }
-                    catch (SQLException ex)
-                    {
-                        System.out.println("Klaida vykdant transakcija: " + ex.getMessage());
-                        Baze.con.rollback();
-                        Baze.con.setAutoCommit(true);
-                    }
-                }
+//                if (action.equals("7"))
+//                {
+//                    System.out.println("\nAutomobilio nuomos perkelimas i kita dalijimosi imone (paslaugu atsisakymas ir uzsisakymas tu paciu paslaugu kitoje imoneje");
+//                    System.out.println("  Iveskite imones koda tos imones, is kurios paslaugu yra atsisakoma:");
+//                    String senos_im_kodas = in.readLine();
+//                    System.out.println("  Iveskite imones koda kitos imones, kurios paslaugu yra uzsisakoma:");
+//                    String naujos_im_kodas = in.readLine();
+//                    System.out.println("  Iveskite automobilio kebulo nr.:");
+//                    String kebulo_nr = in.readLine();
+//
+//                    // TODO id ivedimas (su try)
+//                    int nr = Baze.getLastIvykis();
+//
+//                    try
+//                    {
+//                        Baze.con.setAutoCommit(false);
+//
+//                        Baze.deleteIvykis(nr, im_kodas, kebulo_nr);
+//                        Baze.insertIvykis(nr, im_kodas, kebulo_nr);
+//
+//                        Baze.con.commit();
+//                        Baze.con.setAutoCommit(true);
+//                        System.out.println("Automobilio nuomos i kita dalijimosi imoneje perkelimas sekmingai uzregistruotas!");
+//                    }
+//                    catch (SQLException ex)
+//                    {
+//                        System.out.println("Klaida vykdant transakcija: " + ex.getMessage());
+//                        Baze.con.rollback();
+//                        Baze.con.setAutoCommit(true);
+//                    }
+//                }
 
 
                 if (action.equals("8")) {

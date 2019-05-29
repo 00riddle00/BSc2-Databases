@@ -132,50 +132,57 @@ public class Duombaze {
         return this.stmt_deleteVartotojas.executeUpdate();
     }
 
-    public void insertAuto(String vin, String vn, String marke, String modelis, String spalva, int metai, String savininkas) throws SQLException {
+    public void insertAuto(String vin, String vn, int gamybos_metai, String marke, String modelis, int kuro_sanaudos, boolean atsarginis_ratas_yra, boolean saugos_pagalves_yra, String savininkas, String autoservisas) throws SQLException {
         this.stmt_insertAuto.setString(1, vin);
         this.stmt_insertAuto.setString(2, vn);
-        this.stmt_insertAuto.setString(3, marke);
-        this.stmt_insertAuto.setString(4, spalva);
+        this.stmt_insertAuto.setInt(3, gamybos_metai);
+        this.stmt_insertAuto.setString(4, marke);
         this.stmt_insertAuto.setString(5, modelis);
-        this.stmt_insertAuto.setInt(6, metai);
-        this.stmt_insertAuto.setString(7, savininkas);
+        this.stmt_insertAuto.setInt(6, kuro_sanaudos);
+        this.stmt_insertAuto.setBoolean(7, atsarginis_ratas_yra);
+        this.stmt_insertAuto.setBoolean(8, saugos_pagalves_yra);
+        this.stmt_insertAuto.setString(9, savininkas);
+        this.stmt_insertAuto.setString(10, autoservisas);
         this.stmt_insertAuto.executeUpdate();
     }
 
-    public void insertZmogus(String asmens_kodas, String vardas, String pavarde) throws SQLException {
+    public void insertZmogus(String asmens_kodas, String vardas, String pavarde, String gimimas, String tel_nr, String menesio_pajamos) throws SQLException {
         this.stmt_insertVartotojas.setString(1, asmens_kodas);
         this.stmt_insertVartotojas.setString(2, vardas);
         this.stmt_insertVartotojas.setString(3, pavarde);
+        this.stmt_insertVartotojas.setString(4, gimimas);
+        this.stmt_insertVartotojas.setString(5, tel_nr);
+        this.stmt_insertVartotojas.setString(6, menesio_pajamos);
         this.stmt_insertVartotojas.executeUpdate();
     }
 
-    public void insertIvykis(String vieta) throws SQLException {
-        this.stmt_insertIvykis.setString(1, vieta);
-        this.stmt_insertIvykis.executeUpdate();
-    }
 
 
 
 
-    public int getLastIvykis() throws SQLException {
-        Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT MAX(Nr) AS last FROM " + this.scheme + ".Autoivykis");
-        result.next();
-        return result.getInt("last");
-    }
-
-    public void insertDalyvis(int nr, String vin, String asmens_kodas, boolean kaltas) throws SQLException {
-        this.stmt_deleteIvykis.setInt(1, nr);
-        this.stmt_deleteIvykis.setString(2, vin);
-        this.stmt_deleteIvykis.setString(3, asmens_kodas);
-        if (kaltas) {
-            this.stmt_deleteIvykis.setInt(4, 1);
-        } else {
-            this.stmt_deleteIvykis.setInt(4, 0);
-        }
-        this.stmt_deleteIvykis.executeUpdate();
-    }
+//    public int getLastIvykis() throws SQLException {
+//        Statement stmt = con.createStatement();
+//        ResultSet result = stmt.executeQuery("SELECT MAX(Nr) AS last FROM " + this.scheme + ".Autoivykis");
+//        result.next();
+//        return result.getInt("last");
+//    }
+//
+//    public void insertIvykis(String vieta) throws SQLException {
+//        this.stmt_insertIvykis.setString(1, vieta);
+//        this.stmt_insertIvykis.executeUpdate();
+//    }
+//
+//    public void insertDalyvis(int nr, String vin, String asmens_kodas, boolean kaltas) throws SQLException {
+//        this.stmt_deleteIvykis.setInt(1, nr);
+//        this.stmt_deleteIvykis.setString(2, vin);
+//        this.stmt_deleteIvykis.setString(3, asmens_kodas);
+//        if (kaltas) {
+//            this.stmt_deleteIvykis.setInt(4, 1);
+//        } else {
+//            this.stmt_deleteIvykis.setInt(4, 0);
+//        }
+//        this.stmt_deleteIvykis.executeUpdate();
+//    }
 
 
 }
