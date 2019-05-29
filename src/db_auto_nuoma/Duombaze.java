@@ -33,11 +33,11 @@ public class Duombaze {
     private PreparedStatement stmt_updateVN;
     private PreparedStatement stmt_updateSav;
     private PreparedStatement stmt_deleteAuto;
-    private PreparedStatement stmt_deleteZmogus;
+    private PreparedStatement stmt_deleteVartotojas;
     private PreparedStatement stmt_insertAuto;
-    private PreparedStatement stmt_insertZmogus;
+    private PreparedStatement stmt_insertVartotojas;
     private PreparedStatement stmt_insertIvykis;
-    private PreparedStatement stmt_insertDalyvis;
+    private PreparedStatement stmt_deleteIvykis;
 
     public Duombaze(String scheme) {
         this.scheme = scheme;
@@ -49,13 +49,13 @@ public class Duombaze {
             this.stmt_updateSav = this.con.prepareStatement("UPDATE " + this.scheme + ".Automobilis SET Savininkas = ? WHERE Kebulo_nr = ?");
 
             this.stmt_deleteAuto = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = ?");
-            this.stmt_deleteZmogus = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Zmogus WHERE Asmens_kodas = ?");
+            this.stmt_deleteVartotojas = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Zmogus WHERE AK = ?");
 
-            this.stmt_insertAuto = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Automobilis VALUES(?, ?, ?, ?, ?, ?, ?)");
-            this.stmt_insertZmogus = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Zmogus VALUES(?, ?, ?)");
+            this.stmt_insertAuto = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Automobilis VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            this.stmt_insertVartotojas = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Vartotojas VALUES(?, ?, ?, ?, ?, ?)");
 
-            this.stmt_insertIvykis = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Autoivykis (Vieta) VALUES(?)");
-            this.stmt_insertDalyvis = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Ivykio_dalyvis VALUES(?, ?, ?, ?)");
+            this.stmt_insertIvykis = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Imonese_nuomuojami_automobiliai VALUES(DDEFAULT, ?, ?)");
+            this.stmt_deleteIvykis = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Imonese_nuomuojami_automobiliai WHERE Eil_nr = ?");
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
@@ -67,12 +67,12 @@ public class Duombaze {
             this.stmt_updateVN.close();
             this.stmt_updateSav.close();
             this.stmt_deleteAuto.close();
-            this.stmt_deleteZmogus.close();
+            this.stmt_deleteVartotojas.close();
 
             this.stmt_insertAuto.close();
-            this.stmt_insertZmogus.close();
+            this.stmt_insertVartotojas.close();
             this.stmt_insertIvykis.close();
-            this.stmt_insertDalyvis.close();
+            this.stmt_deleteIvykis.close();
 
         } catch (SQLException sqle) {
             System.out.println(sqle);
@@ -82,7 +82,7 @@ public class Duombaze {
 
     public ResultSet searchAutoByVIN(String vin) throws SQLException {
         Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Auto_ir_savininkas WHERE Kebulo_nr = '" + vin + "'");
+        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = '" + vin + "'");
         if (result.next()) {
             return result;
         } else {
@@ -92,7 +92,7 @@ public class Duombaze {
 
     public ResultSet searchZmogusByAK(String AK) throws SQLException {
         Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Zmogus_ir_ivykis WHERE Asmens_kodas = '" + AK + "'");
+        ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Vartotojas WHERE AK = '" + AK + "'");
         if (result.next()) {
             return result;
         } else {
@@ -108,13 +108,6 @@ public class Duombaze {
         } else {
             return null;
         }
-    }
-
-    public int getLastIvykis() throws SQLException {
-        Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT MAX(Nr) AS last FROM " + this.scheme + ".Autoivykis");
-        result.next();
-        return result.getInt("last");
     }
 
     public int updateVN(String valst_nr, String vin) throws SQLException {
@@ -135,8 +128,8 @@ public class Duombaze {
     }
 
     public int deleteZmogus(String ak) throws SQLException {
-        this.stmt_deleteZmogus.setString(1, ak);
-        return this.stmt_deleteZmogus.executeUpdate();
+        this.stmt_deleteVartotojas.setString(1, ak);
+        return this.stmt_deleteVartotojas.executeUpdate();
     }
 
     public void insertAuto(String vin, String vn, String marke, String modelis, String spalva, int metai, String savininkas) throws SQLException {
@@ -151,10 +144,10 @@ public class Duombaze {
     }
 
     public void insertZmogus(String asmens_kodas, String vardas, String pavarde) throws SQLException {
-        this.stmt_insertZmogus.setString(1, asmens_kodas);
-        this.stmt_insertZmogus.setString(2, vardas);
-        this.stmt_insertZmogus.setString(3, pavarde);
-        this.stmt_insertZmogus.executeUpdate();
+        this.stmt_insertVartotojas.setString(1, asmens_kodas);
+        this.stmt_insertVartotojas.setString(2, vardas);
+        this.stmt_insertVartotojas.setString(3, pavarde);
+        this.stmt_insertVartotojas.executeUpdate();
     }
 
     public void insertIvykis(String vieta) throws SQLException {
@@ -162,16 +155,26 @@ public class Duombaze {
         this.stmt_insertIvykis.executeUpdate();
     }
 
+
+
+
+    public int getLastIvykis() throws SQLException {
+        Statement stmt = con.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT MAX(Nr) AS last FROM " + this.scheme + ".Autoivykis");
+        result.next();
+        return result.getInt("last");
+    }
+
     public void insertDalyvis(int nr, String vin, String asmens_kodas, boolean kaltas) throws SQLException {
-        this.stmt_insertDalyvis.setInt(1, nr);
-        this.stmt_insertDalyvis.setString(2, vin);
-        this.stmt_insertDalyvis.setString(3, asmens_kodas);
+        this.stmt_deleteIvykis.setInt(1, nr);
+        this.stmt_deleteIvykis.setString(2, vin);
+        this.stmt_deleteIvykis.setString(3, asmens_kodas);
         if (kaltas) {
-            this.stmt_insertDalyvis.setInt(4, 1);
+            this.stmt_deleteIvykis.setInt(4, 1);
         } else {
-            this.stmt_insertDalyvis.setInt(4, 0);
+            this.stmt_deleteIvykis.setInt(4, 0);
         }
-        this.stmt_insertDalyvis.executeUpdate();
+        this.stmt_deleteIvykis.executeUpdate();
     }
 
 
