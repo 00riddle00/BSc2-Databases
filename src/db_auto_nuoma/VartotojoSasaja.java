@@ -62,7 +62,7 @@ public class VartotojoSasaja {
                         System.out.println("Gamybos metai: " + result.getInt("Gamybos_metai"));
                         System.out.println("Marke: " + result.getString("Marke"));
                         System.out.println("Modelis: " + result.getString("Modelis"));
-                        System.out.println("Kuro sanaudos: " + result.getFloat("Kuro_sanaudos") + "l/100km");
+                        System.out.println("Kuro sanaudos: " + result.getString("Kuro_sanaudos") + "l/100km");
 
                         String yra_ratas = result.getString("Atsarginis_ratas_yra");
                         yra_ratas = yra_ratas.equals("t") ? "Yra" : "Nera";
@@ -93,7 +93,7 @@ public class VartotojoSasaja {
                         System.out.println("Pavarde: " + result.getString("Pavarde"));
                         System.out.println("Gimimas: " + result.getString("Gimimas"));
                         System.out.println("Telefono numeris: " + result.getString("Tel_nr"));
-                        System.out.println("Menesio pajamos: " + result.getFloat("Menesio_pajamos"));
+                        System.out.println("Menesio pajamos: " + result.getString("Menesio_pajamos"));
 
                         ResultSet result2 = Baze.searchZmogausAutos(asmens_kodas);
                         if (result2 == null) {
@@ -103,7 +103,7 @@ public class VartotojoSasaja {
                             do {
                                 System.out.println("  " + result2.getString("Kebulo_nr") + ", v.n. " + result2.getString("Valst_nr")
                                         + ", " + result2.getString("Marke") + " " + result2.getString("Modelis")
-                                        + ", " + result2.getFloat("Kuro_sanaudos") + "l/100km, " + result2.getInt("Gamybos_metai") + " gamybos");
+                                        + ", " + result2.getString("Kuro_sanaudos") + "l/100km, " + result2.getInt("Gamybos_metai") + " gamybos");
                             }
                             while (result2.next());
                         }
@@ -199,9 +199,12 @@ public class VartotojoSasaja {
                     String tel_nr = in.readLine();
 
                     System.out.println("  Iveskite menesio pajamas: (Palikite tuscia (Enter), jei nera informacijos)");
-                    String menesio_pajamos = in.readLine();
-                    if (menesio_pajamos.equals("")) {
-                        menesio_pajamos = "NULL";
+                    String str_menesio_pajamos = in.readLine();
+
+                    int menesio_pajamos = 0;
+
+                    if (!str_menesio_pajamos.equals("")) {
+                        menesio_pajamos = Integer.parseInt(str_menesio_pajamos);
                     }
 
                     Baze.insertZmogus(asmens_kodas, vardas, pavarde, gimimas, tel_nr, menesio_pajamos);

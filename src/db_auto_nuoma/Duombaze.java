@@ -205,14 +205,20 @@ public class Duombaze {
         }
     }
 
-    public void insertZmogus(String asmens_kodas, String vardas, String pavarde, String gimimas, String tel_nr, String menesio_pajamos) throws SQLException {
+    public void insertZmogus(String asmens_kodas, String vardas, String pavarde, String gimimas, String tel_nr, int menesio_pajamos) throws SQLException {
         try {
             this.stmt_insertVartotojas.setString(1, asmens_kodas);
             this.stmt_insertVartotojas.setString(2, vardas);
             this.stmt_insertVartotojas.setString(3, pavarde);
             this.stmt_insertVartotojas.setString(4, gimimas);
             this.stmt_insertVartotojas.setString(5, tel_nr);
-            this.stmt_insertVartotojas.setString(6, menesio_pajamos);
+
+            if (menesio_pajamos == 0) {
+                this.stmt_insertVartotojas.setInt(6, menesio_pajamos);
+            } else {
+                this.stmt_insertVartotojas.setInt(6, menesio_pajamos);
+            }
+
             this.stmt_insertVartotojas.executeUpdate();
         } catch (SQLException sqle) {
             System.out.println(sqle);
