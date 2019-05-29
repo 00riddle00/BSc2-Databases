@@ -13,16 +13,6 @@ public class VartotojoSasaja {
         String action = "";
         while (!action.equals("0")) {
 
-            // Ieskoti TP pagal VIN
-            // Ieskoti zmogu pagal asmens_koda
-            // Keisti TP valst. nr.
-            // Keisti TP savininka
-            // Iregistruoti nauja TP
-            // Iregistruoti zmogu
-            // Iregistruoti autoivyki
-            // Pasalinti TP
-            // Pasalinti zmogu
-
             // Ieskoti Automobilio pagal Kebulo Nr.
             // Ieskoti Vartotojo pagal AK
             // Keisti Automobilio valst. nr.
@@ -63,13 +53,16 @@ public class VartotojoSasaja {
                         System.out.println("Gamybos metai: " + result.getString("Gamybos_metai"));
                         System.out.println("Marke: " + result.getString("Marke"));
                         System.out.println("Modelis: " + result.getString("Modelis"));
-                        System.out.println("Kuro sanaudos: " + result.getString("Kuro_sanaudos"));
+                        System.out.println("Kuro sanaudos: " + result.getString("Kuro_sanaudos") + "l/100km");
 
                         String yra_ratas = result.getString("Atsarginis_ratas_yra");
                         yra_ratas = yra_ratas.equals("t") ? "Yra" : "Nera";
                         System.out.println("Atsarginis ratas: " + yra_ratas);
 
-                        System.out.println("Saugos pagalves: " + result.getString("Saugos_pagalves_yra"));
+                        String yra_pagalves = result.getString("Saugos_pagalves_yra");
+                        yra_pagalves = yra_pagalves.equals("t") ? "Yra" : "Nera";
+                        System.out.println("Saugos pagalves: " + yra_pagalves);
+
                         System.out.println("Savininkas: " + result.getString("Savininkas"));
                         System.out.println("Autoservisas: " + result.getString("Autoservisas"));
                     }
@@ -89,8 +82,6 @@ public class VartotojoSasaja {
                         System.out.println("Gimimas: " + result.getString("Gimimas"));
                         System.out.println("Telefono numeris: " + result.getString("Tel_nr"));
                         System.out.println("Menesio pajamos: " + result.getString("Menesio_pajamos"));
-
-                        System.out.println("Amzius: " + result.getString("Amzius"));
 
                         ResultSet result2 = Baze.searchZmogausAutos(asmens_kodas);
                         if (result2 == null) {

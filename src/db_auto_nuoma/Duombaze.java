@@ -6,16 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 
-// Ieskoti TP pagal VIN
-// Ieskoti zmogu pagal asmens_koda
-// Keisti TP valst. nr.
-// Keisti TP savininka
-// Iregistruoti nauja TP
-// Iregistruoti zmogu
-// Iregistruoti autoivyki
-// Pasalinti TP
-// Pasalinti zmogu
-
 // Ieskoti Automobilio pagal Kebulo Nr.
 // Ieskoti Vartotojo pagal AK
 // Keisti Automobilio valst. nr.
@@ -88,8 +78,7 @@ public class Duombaze {
     public ResultSet searchAutoByVIN(String vin) throws SQLException {
         try {
             Statement stmt = con.createStatement();
-//            ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = '" + vin + "'");
-            ResultSet result = stmt.executeQuery("SELECT * FROM togi3017.Automobilis WHERE Kebulo_nr = 'AFA10200000555001'");
+            ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = '" + vin + "'");
             System.out.println("\ntest\n");
             if (result.next()) {
                 return result;
