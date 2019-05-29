@@ -71,7 +71,10 @@ public class VartotojoSasaja {
                         System.out.println("Saugos pagalves: " + yra_pagalves);
 
                         System.out.println("Savininkas: " + result.getString("Savininkas"));
-                        System.out.println("Autoservisas: " + result.getString("Autoservisas"));
+
+                        String autoservisas = result.getString("Autoservisas");
+                        if (autoservisas == null) autoservisas = "Nera";
+                        System.out.println("Autoservisas: " + autoservisas);
                     }
                 }
 
