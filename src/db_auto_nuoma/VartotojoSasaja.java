@@ -23,7 +23,14 @@ public class VartotojoSasaja {
             // Pasalinti Automobili
             // Pasalinti Vartotoja
 
-            System.out.println("\n-------------------------------------------------------");
+
+            System.out.println("\n|------------------------------------------------------|");
+            System.out.println ("|         ______                                       |");
+            System.out.println ("|        /|_||_\\`.__                                   |");
+            System.out.println ("|       (   _    _ _\\                                  |");
+            System.out.println ("|       =`-(_)--(_)-'                                  |");
+            System.out.println ("|------------------------------------------------------|");
+
             System.out.println("-> Automobiliu nuomos duomenu baze (vartotojai, automobiliai, dalijimosi imones, autoservisai)");
             System.out.println("Veiksmai:");
             System.out.println("  1) Surasti automobili pagal kebulo nr.");

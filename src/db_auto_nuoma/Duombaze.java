@@ -40,7 +40,7 @@ public class Duombaze {
             this.stmt_updateSav = this.con.prepareStatement("UPDATE " + this.scheme + ".Automobilis SET Savininkas = ? WHERE Kebulo_nr = ?");
 
             this.stmt_deleteAuto = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = ?");
-            this.stmt_deleteVartotojas = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Zmogus WHERE AK = ?");
+            this.stmt_deleteVartotojas = this.con.prepareStatement("DELETE FROM " + this.scheme + ".Vartotojas WHERE AK = ?");
 
             this.stmt_insertAuto = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Automobilis VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             this.stmt_insertVartotojas = this.con.prepareStatement("INSERT INTO " + this.scheme + ".Vartotojas VALUES(?, ?, ?, ?, ?, ?)");
@@ -79,7 +79,6 @@ public class Duombaze {
         try {
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery("SELECT * FROM " + this.scheme + ".Automobilis WHERE Kebulo_nr = '" + vin + "'");
-            System.out.println("\ntest\n");
             if (result.next()) {
                 return result;
             } else {
